@@ -31,7 +31,7 @@ Details about the content of this release are available in the release note [her
 
 ## Compatibility information
 
-Please refer to the repository of the BSP **board** driver you are using to know which version of this BSP component driver to use. It is **crucial** that you use a consistent set of versions.
+Please refer to the repository of the BSP **board** driver you are using to know which version of this BSP component driver to use. It is **crucial** that you use a consistent set of versions. It is **crucial** that you use a consistent set of versions as indicated.
 
 ## Troubleshooting
 
