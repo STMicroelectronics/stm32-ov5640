@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2018 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019-2020 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -1961,45 +1960,45 @@ int32_t OV5640_SetPCLK(OV5640_Object_t *pObj, uint32_t ClockValue)
 {
   int32_t ret;
   uint8_t tmp;
-  
-  switch(ClockValue)
+
+  switch (ClockValue)
   {
-  case OV5640_PCLK_7M:
-    tmp = 0x38;
-    ret = ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL2, &tmp, 1);
-    tmp = 0x16;
-    ret += ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL3, &tmp, 1);
-    break;
-  case OV5640_PCLK_8M:
-    tmp = 0x40;
-    ret = ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL2, &tmp, 1);
-    tmp = 0x16;
-    ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL3, &tmp, 1);
-    break;
-  case OV5640_PCLK_9M:
-    ret = ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL2, &tmp, 1);
-    tmp = 0x18;
-    ret += ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL3, &tmp, 1);
-    break;
-  case OV5640_PCLK_12M:
-    ret = ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL2, &tmp, 1);
-    tmp = 0x16;
-    ret += ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL3, &tmp, 1);
-    break;
-  case OV5640_PCLK_24M:
-  default:
-    tmp = 0x60;  
-    ret = ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL2, &tmp, 1);
-    tmp = 0x13;
-    ret += ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL3, &tmp, 1);
-    break;
+    case OV5640_PCLK_7M:
+      tmp = 0x38;
+      ret = ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL2, &tmp, 1);
+      tmp = 0x16;
+      ret += ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL3, &tmp, 1);
+      break;
+    case OV5640_PCLK_8M:
+      tmp = 0x40;
+      ret = ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL2, &tmp, 1);
+      tmp = 0x16;
+      ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL3, &tmp, 1);
+      break;
+    case OV5640_PCLK_9M:
+      ret = ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL2, &tmp, 1);
+      tmp = 0x18;
+      ret += ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL3, &tmp, 1);
+      break;
+    case OV5640_PCLK_12M:
+      ret = ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL2, &tmp, 1);
+      tmp = 0x16;
+      ret += ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL3, &tmp, 1);
+      break;
+    case OV5640_PCLK_24M:
+    default:
+      tmp = 0x60;
+      ret = ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL2, &tmp, 1);
+      tmp = 0x13;
+      ret += ov5640_write_reg(&pObj->Ctx, OV5640_SC_PLL_CONTRL3, &tmp, 1);
+      break;
   }
-  
+
   if (ret != OV5640_OK)
   {
     ret = OV5640_ERROR;
   }
-  
+
   return ret;
 }
 
@@ -2072,5 +2071,3 @@ static int32_t OV5640_WriteRegWrap(void *handle, uint16_t Reg, uint8_t *pData, u
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
