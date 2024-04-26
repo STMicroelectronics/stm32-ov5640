@@ -23,7 +23,7 @@
 <center>
 <h1 id="release-notes-for">Release Notes for</h1>
 <h1 id="ov5640-component-driver"><mark>OV5640 Component Driver </mark></h1>
-<p>Copyright © 2019-2023 STMicroelectronics<br />
+<p>Copyright © 2019-2024 STMicroelectronics<br />
 </p>
 <a href="https://www.st.com" class="logo"><img src="_htmresc/st_logo_2020.png" alt="ST logo" /></a>
 </center>
@@ -33,9 +33,45 @@
 <div class="col-sm-12 col-lg-8">
 <h1 id="update-history">Update History</h1>
 <div class="collapse">
-<input type="checkbox" id="collapse-section9" checked aria-hidden="true"> <label for="collapse-section9" aria-hidden="true"><strong>V3.2.4 / 27-June-2023</strong></label>
+<input type="checkbox" id="collapse-section12" checked aria-hidden="true"> <label for="collapse-section11" aria-hidden="true"><strong>V4.0.2 / 12-January-2024</strong></label>
 <div>
 <h2 id="main-changes">Main Changes</h2>
+<ul>
+<li>Update Timing for 800x480 resolution</li>
+<li>Add 48 MHz Pixel clock support</li>
+<li>Correct return value for parallel mode config</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section11" aria-hidden="true"> <label for="collapse-section11" aria-hidden="true"><strong>V4.0.1 / 08-December-2023</strong></label>
+<div>
+<h2 id="main-changes-1">Main Changes</h2>
+<ul>
+<li>Correct pclk clock setting at 9 and 12 MHz in OV5640_SetPCLK() function.</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section10" aria-hidden="true"> <label for="collapse-section10" aria-hidden="true"><strong>V4.0.0 / 28-September-2023</strong></label>
+<div>
+<h2 id="main-changes-2">Main Changes</h2>
+<ul>
+<li>Add support of serial interface:
+<ul>
+<li>OV5640_Init() must be called for either PARALLEL_MODE or SERIAL_MODE.</li>
+</ul></li>
+</ul>
+<h2 id="backward-compatibility">Backward compatibility</h2>
+<ul>
+<li>This software breaks the compatibility with previous versions</li>
+</ul>
+</div>
+</div>
+<div class="collapse">
+<input type="checkbox" id="collapse-section9" aria-hidden="true"> <label for="collapse-section9" aria-hidden="true"><strong>V3.2.4 / 27-June-2023</strong></label>
+<div>
+<h2 id="main-changes-3">Main Changes</h2>
 <ul>
 <li>Update license</li>
 </ul>
@@ -44,7 +80,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section8" aria-hidden="true"> <label for="collapse-section8" aria-hidden="true"><strong>V3.2.3 / 08-December-2022</strong></label>
 <div>
-<h2 id="main-changes-1">Main Changes</h2>
+<h2 id="main-changes-4">Main Changes</h2>
 <ul>
 <li>Code Spell fixed</li>
 </ul>
@@ -53,7 +89,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section7" aria-hidden="true"> <label for="collapse-section7" aria-hidden="true"><strong>V3.2.2 / 01-February-2022</strong></label>
 <div>
-<h2 id="main-changes-2">Main Changes</h2>
+<h2 id="main-changes-5">Main Changes</h2>
 <ul>
 <li>Update license</li>
 </ul>
@@ -62,7 +98,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section6" aria-hidden="true"> <label for="collapse-section6" aria-hidden="true"><strong>V3.2.1 / 30-April-2021</strong></label>
 <div>
-<h2 id="main-changes-3">Main Changes</h2>
+<h2 id="main-changes-6">Main Changes</h2>
 <ul>
 <li>Formatting update</li>
 </ul>
@@ -71,7 +107,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section5" aria-hidden="true"> <label for="collapse-section5" aria-hidden="true"><strong>V3.2.0 / 26-january-2021</strong></label>
 <div>
-<h2 id="main-changes-4">Main Changes</h2>
+<h2 id="main-changes-7">Main Changes</h2>
 <ul>
 <li>Set default Pixel clock to 12Mhz</li>
 <li>Add OV5640_SetPixelClock() API</li>
@@ -84,7 +120,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section4"  aria-hidden="true"> <label for="collapse-section4" aria-hidden="true"><strong>V3.1.0 / 11-December-2020</strong></label>
 <div>
-<h2 id="main-changes-5">Main Changes</h2>
+<h2 id="main-changes-8">Main Changes</h2>
 <ul>
 <li>Add support of RGB888, YUV422, Y8 and JPEG formats</li>
 <li>Add support gradual vertical colorbar</li>
@@ -95,7 +131,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section3" aria-hidden="true"> <label for="collapse-section3" aria-hidden="true"><strong>V3.0.0 / 17-April-2020</strong></label>
 <div>
-<h2 id="main-changes-6">Main Changes</h2>
+<h2 id="main-changes-9">Main Changes</h2>
 <ul>
 <li>Second Official Release of OV5640 Camera Component drivers in line with legacy BSP drivers development guidelines</li>
 <li>Add Support of the following features:
@@ -111,7 +147,7 @@
 <ul>
 <li>BSP Common version v6.0.0 or above</li>
 </ul>
-<h2 id="backward-compatibility">Backward compatibility</h2>
+<h2 id="backward-compatibility-1">Backward compatibility</h2>
 <ul>
 <li>This software breaks the compatibility with previous version v2.0.0</li>
 <li>This software is compatible with version v1.0.0</li>
@@ -121,7 +157,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section2" aria-hidden="true"> <label for="collapse-section2" aria-hidden="true"><strong>V2.0.0 / 07-February-2020</strong></label>
 <div>
-<h2 id="main-changes-7">Main Changes</h2>
+<h2 id="main-changes-10">Main Changes</h2>
 <ul>
 <li>Official Release of OV5640 Camera Component drivers in line with legacy BSP drivers development guidelines<br />
 </li>
@@ -135,7 +171,7 @@
 <ul>
 <li>BSP Common version v5.1.2 or lower versions</li>
 </ul>
-<h2 id="backward-compatibility-1">Backward compatibility</h2>
+<h2 id="backward-compatibility-2">Backward compatibility</h2>
 <ul>
 <li>This software breaks the compatibility with previous version v1.0.0</li>
 </ul>
@@ -144,7 +180,7 @@
 <div class="collapse">
 <input type="checkbox" id="collapse-section1" aria-hidden="true"> <label for="collapse-section1" aria-hidden="true"><strong>V1.0.0 / 30-0ctober-2019</strong></label>
 <div>
-<h2 id="main-changes-8">Main Changes</h2>
+<h2 id="main-changes-11">Main Changes</h2>
 <ul>
 <li>First Official Release of OV5640 Camera Component drivers in line with STM32Cube BSP drivers development guidelines (UM2298)<br />
 </li>

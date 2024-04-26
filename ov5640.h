@@ -68,6 +68,8 @@ typedef struct
   OV5640_IO_t         IO;
   ov5640_ctx_t        Ctx;
   uint8_t             IsInitialized;
+  uint8_t             Mode;
+  uint32_t            VirtualChannelID;
 } OV5640_Object_t;
 
 typedef struct
@@ -140,12 +142,12 @@ typedef struct
 #define OV5640_JPEG                     0x08U   /* Compressed format JPEG          */
 
 /* Polarity */
-#define OV5640_POLARITY_PCLK_LOW  0x00U /* Signal Active Low          */
-#define OV5640_POLARITY_PCLK_HIGH 0x01U /* Signal Active High         */
-#define OV5640_POLARITY_HREF_LOW  0x00U /* Signal Active Low          */
-#define OV5640_POLARITY_HREF_HIGH 0x01U /* Signal Active High         */
-#define OV5640_POLARITY_VSYNC_LOW 0x01U /* Signal Active Low          */
-#define OV5640_POLARITY_VSYNC_HIGH  0x00U /* Signal Active High         */
+#define OV5640_POLARITY_PCLK_LOW        0x00U /* Signal Active Low          */
+#define OV5640_POLARITY_PCLK_HIGH       0x01U /* Signal Active High         */
+#define OV5640_POLARITY_HREF_LOW        0x00U /* Signal Active Low          */
+#define OV5640_POLARITY_HREF_HIGH       0x01U /* Signal Active High         */
+#define OV5640_POLARITY_VSYNC_LOW       0x01U /* Signal Active Low          */
+#define OV5640_POLARITY_VSYNC_HIGH      0x00U /* Signal Active High         */
 
 /* Mirror/Flip */
 #define OV5640_MIRROR_FLIP_NONE         0x00U   /* Set camera normal mode     */
@@ -191,6 +193,11 @@ typedef struct
 #define OV5640_PCLK_9M                  0x02U   /* Pixel Clock set to 9Mhz    */
 #define OV5640_PCLK_12M                 0x04U   /* Pixel Clock set to 12Mhz   */
 #define OV5640_PCLK_24M                 0x08U   /* Pixel Clock set to 24Mhz   */
+#define OV5640_PCLK_48M                 0x09U   /* Pixel Clock set to 48MHz   */
+
+/* Mode */
+#define PARALLEL_MODE                   0x00U   /* Parallel Interface Mode */
+#define SERIAL_MODE                     0x01U   /* Serial Interface Mode   */
 
 /**
   * @}
@@ -224,6 +231,12 @@ int32_t OV5640_NightModeConfig(OV5640_Object_t *pObj, uint32_t Cmd);
 int32_t OV5640_ColorbarModeConfig(OV5640_Object_t *pObj, uint32_t Cmd);
 int32_t OV5640_EmbeddedSynchroConfig(OV5640_Object_t *pObj, OV5640_SyncCodes_t *pSyncCodes);
 int32_t OV5640_SetPCLK(OV5640_Object_t *pObj, uint32_t ClockValue);
+
+int OV5640_EnableDVPMode(OV5640_Object_t *pObj);
+int32_t OV5640_EnableMIPIMode(OV5640_Object_t *pObj);
+int32_t OV5640_SetMIPIVirtualChannel(OV5640_Object_t *pObj, uint32_t vchannel);
+int32_t OV5640_Start(OV5640_Object_t *pObj);
+int32_t OV5640_Stop(OV5640_Object_t *pObj);
 
 /* CAMERA driver structure */
 extern OV5640_CAMERA_Drv_t   OV5640_CAMERA_Driver;
