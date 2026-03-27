@@ -74,6 +74,7 @@ OV5640_CAMERA_Drv_t   OV5640_CAMERA_Driver =
   */
 static int32_t OV5640_ReadRegWrap(void *handle, uint16_t Reg, uint8_t *Data, uint16_t Length);
 static int32_t OV5640_WriteRegWrap(void *handle, uint16_t Reg, uint8_t *Data, uint16_t Length);
+static int32_t OV5640_ModifyRegWrap(void *handle, uint16_t Reg, uint16_t Mask, uint8_t *Data, uint16_t Length);
 static int32_t OV5640_Delay(OV5640_Object_t *pObj, uint32_t Delay);
 
 /**
@@ -107,6 +108,7 @@ int32_t OV5640_RegisterBusIO(OV5640_Object_t *pObj, OV5640_IO_t *pIO)
 
     pObj->Ctx.ReadReg  = OV5640_ReadRegWrap;
     pObj->Ctx.WriteReg = OV5640_WriteRegWrap;
+    pObj->Ctx.ModifyReg = OV5640_ModifyRegWrap;
     pObj->Ctx.handle   = pObj;
 
     if (pObj->IO.Init != NULL)
@@ -1430,6 +1432,7 @@ int32_t OV5640_SetBrightness(OV5640_Object_t *pObj, int32_t Level)
   int32_t ret;
   const uint8_t brightness_level[] = {0x40U, 0x30U, 0x20U, 0x10U, 0x00U, 0x10U, 0x20U, 0x30U, 0x40U};
   uint8_t tmp;
+  uint8_t mask = 0x08;
 
   tmp = 0xFF;
   ret = ov5640_write_reg(&pObj->Ctx, OV5640_ISP_CONTROL01, &tmp, 1);
@@ -1449,16 +1452,16 @@ int32_t OV5640_SetBrightness(OV5640_Object_t *pObj, int32_t Level)
   {
     if (Level < 0)
     {
-      tmp = 0x01;
-      if (ov5640_write_reg(&pObj->Ctx, OV5640_SDE_CTRL8, &tmp, 1) != OV5640_OK)
+      tmp = 0x08;
+      if (ov5640_modify_reg(&pObj->Ctx, OV5640_SDE_CTRL8, mask, &tmp, 1) != OV5640_OK)
       {
         ret = OV5640_ERROR;
       }
     }
     else
     {
-      tmp = 0x09;
-      if (ov5640_write_reg(&pObj->Ctx, OV5640_SDE_CTRL8, &tmp, 1) != OV5640_OK)
+      tmp = 0x00;
+      if (ov5640_modify_reg(&pObj->Ctx, OV5640_SDE_CTRL8, mask, &tmp, 1) != OV5640_OK)
       {
         ret = OV5640_ERROR;
       }
@@ -1482,7 +1485,7 @@ int32_t OV5640_SetSaturation(OV5640_Object_t *pObj, int32_t Level)
   int32_t ret;
   const uint8_t saturation_level[] = {0x00U, 0x10U, 0x20U, 0x30U, 0x80U, 0x70U, 0x60U, 0x50U, 0x40U};
   uint8_t tmp;
-
+  uint8_t mask = 0x41;
   tmp = 0xFF;
   ret = ov5640_write_reg(&pObj->Ctx, OV5640_ISP_CONTROL01, &tmp, 1);
 
@@ -1504,7 +1507,7 @@ int32_t OV5640_SetSaturation(OV5640_Object_t *pObj, int32_t Level)
   if (ret == OV5640_OK)
   {
     tmp = 0x41;
-    ret = ov5640_write_reg(&pObj->Ctx, OV5640_SDE_CTRL8, &tmp, 1);
+    ret = ov5640_modify_reg(&pObj->Ctx, OV5640_SDE_CTRL8, mask, &tmp, 1);
   }
 
   if (ret != OV5640_OK)
@@ -1528,6 +1531,7 @@ int32_t OV5640_SetContrast(OV5640_Object_t *pObj, int32_t Level)
   int32_t ret;
   const uint8_t contrast_level[] = {0x10U, 0x14U, 0x18U, 0x1CU, 0x20U, 0x24U, 0x28U, 0x2CU, 0x30U};
   uint8_t tmp;
+  uint16_t mask = 0x41;
 
   tmp = 0xFF;
   ret = ov5640_write_reg(&pObj->Ctx, OV5640_ISP_CONTROL01, &tmp, 1);
@@ -1549,7 +1553,7 @@ int32_t OV5640_SetContrast(OV5640_Object_t *pObj, int32_t Level)
   if (ret == OV5640_OK)
   {
     tmp = 0x41;
-    ret = ov5640_write_reg(&pObj->Ctx, OV5640_SDE_CTRL8, &tmp, 1);
+    ret =ov5640_modify_reg(&pObj->Ctx, OV5640_SDE_CTRL8, mask, &tmp, 1);
   }
 
   if (ret != OV5640_OK)
@@ -1579,6 +1583,7 @@ int32_t OV5640_SetHueDegree(OV5640_Object_t *pObj, int32_t Degree)
                                       0x31U
                                      };
   uint8_t tmp;
+  uint8_t mask = 0x33;
 
   tmp = 0xFF;
   ret = ov5640_write_reg(&pObj->Ctx, OV5640_ISP_CONTROL01, &tmp, 1);
@@ -1601,7 +1606,7 @@ int32_t OV5640_SetHueDegree(OV5640_Object_t *pObj, int32_t Degree)
   if (ret == OV5640_OK)
   {
     tmp = hue_degree_ctrl8[Degree + 6];
-    ret = ov5640_write_reg(&pObj->Ctx, OV5640_SDE_CTRL8, &tmp, 1);
+    ret = ov5640_modify_reg(&pObj->Ctx, OV5640_SDE_CTRL8, mask, &tmp, 1);
   }
 
   if (ret != OV5640_OK)
@@ -2226,6 +2231,26 @@ static int32_t OV5640_WriteRegWrap(void *handle, uint16_t Reg, uint8_t *pData, u
   OV5640_Object_t *pObj = (OV5640_Object_t *)handle;
 
   return pObj->IO.WriteReg(pObj->IO.Address, Reg, pData, Length);
+}
+/**
+  * @brief  Wrap component ModifyReg to Bus Modify function
+  * @param  handle  Component object handle
+  * @param  Reg  The target register address to write
+  * @param  pData  The target register value to be written
+  * @param  Length  buffer size to be written
+  * @retval error status
+  */
+static int32_t OV5640_ModifyRegWrap(void *handle, uint16_t Reg, uint16_t Mask, uint8_t *pData, uint16_t Length)
+{
+  OV5640_Object_t *pObj = (OV5640_Object_t *)handle;
+  uint8_t TempData1 = 0;
+
+ pObj->IO.ReadReg(pObj->IO.Address, Reg, &TempData1, Length);
+
+
+ TempData1 = TempData1 | ((*pData) & Mask);
+
+ return pObj->IO.WriteReg(pObj->IO.Address, Reg, &TempData1, Length);
 }
 
 /**

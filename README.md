@@ -1,5 +1,7 @@
 # BSP OV5640 Component
 
+![tag](https://img.shields.io/badge/tag-v4.0.3-brightgreen.svg)
+
 ## Overview
 
 **STM32Cube** is an STMicroelectronics original initiative to ease the developers life by reducing efforts, time and cost.

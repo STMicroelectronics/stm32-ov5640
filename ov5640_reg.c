@@ -61,6 +61,19 @@ int32_t ov5640_write_reg(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *data, uint16_
 }
 
 /**
+  * @brief  Modify OV5640 component registers
+  * @param  ctx component context
+  * @param  reg Register to write to
+  * @param  pdata Pointer to data buffer
+  * @param  length Number of data to write
+  * @retval Component status
+  */
+int32_t ov5640_modify_reg(ov5640_ctx_t *ctx, uint16_t reg, uint16_t mask, uint8_t *data, uint16_t length)
+{
+  return ctx->ModifyReg(ctx->handle, reg, mask, data, length);
+}
+
+/**
   * @}
   */
 

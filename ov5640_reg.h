@@ -715,11 +715,13 @@ extern "C" {
 
 typedef int32_t (*OV5640_Write_Func)(void *, uint16_t, uint8_t *, uint16_t);
 typedef int32_t (*OV5640_Read_Func)(void *, uint16_t, uint8_t *, uint16_t);
+typedef int32_t (*OV5640_Modify_Func)(void *, uint16_t, uint16_t, uint8_t *, uint16_t);
 
 typedef struct
 {
   OV5640_Write_Func   WriteReg;
   OV5640_Read_Func    ReadReg;
+  OV5640_Modify_Func  ModifyReg;
   void                *handle;
 } ov5640_ctx_t;
 
@@ -731,6 +733,7 @@ typedef struct
   *******************************************************************************/
 int32_t ov5640_write_reg(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint16_t length);
 int32_t ov5640_read_reg(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint16_t length);
+int32_t ov5640_modify_reg(ov5640_ctx_t *ctx, uint16_t reg, uint16_t mask, uint8_t *pdata, uint16_t length);
 
 int32_t ov5640_register_set(ov5640_ctx_t *ctx, uint16_t reg, uint8_t value);
 int32_t ov5640_register_get(ov5640_ctx_t *ctx, uint16_t reg, uint8_t *value);

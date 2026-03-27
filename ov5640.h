@@ -51,6 +51,7 @@ typedef int32_t (*OV5640_GetTick_Func)(void);
 typedef int32_t (*OV5640_Delay_Func)(uint32_t);
 typedef int32_t (*OV5640_WriteReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 typedef int32_t (*OV5640_ReadReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
+typedef int32_t (*OV5640_ModifyReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 
 typedef struct
 {
@@ -59,6 +60,7 @@ typedef struct
   uint16_t                  Address;
   OV5640_WriteReg_Func      WriteReg;
   OV5640_ReadReg_Func       ReadReg;
+  OV5640_ModifyReg_Func     ModifyReg;
   OV5640_GetTick_Func       GetTick;
 } OV5640_IO_t;
 
